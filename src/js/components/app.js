@@ -7,16 +7,11 @@ var Task = require('./task');
 var APP = React.createClass({
   getInitialState: function() {
     return {
-      tasks: []
-    };
-  },
-  componentDidMount: function() {
-    this.setState({
       tasks: [
         'Work on website',
         'Do some other shit'
       ]
-    });
+    };
   },
   handleClick: function(index) {
     for (var i in this.refs) {
