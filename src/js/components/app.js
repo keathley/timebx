@@ -18,15 +18,14 @@ var APP = React.createClass({
       ]
     });
   },
-
   handleClick: function(index) {
     for (var i in this.refs) {
-      var task = this.refs[i];
-      console.log(task);
-      task.updateGlobalPos();
+      if (index !== i) {
+        var task = this.refs[i];
+        task.updateGlobalPos();
+      }
     }
   },
-
   render: function() {
     var tasks = this.state.tasks.map(function(task, i) {
       return (
