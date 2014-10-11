@@ -1,0 +1,15 @@
+.task {
+  position: relative;
+  overflow: auto;
+  height: 100px;
+
+  .grabber {
+    height: 14px;
+    background-color: #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+  }
+}

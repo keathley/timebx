@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+# bootstrap
+#
+# Spyc3r
+
+echo ""
+echo "Time to get stuff done"
+echo ""
+
+#
+# Check for npm (which means they have node installed)
+#
+if test ! $(which npm)
+then
+  echo " x You need to install Node and npm"
+  echo "   brew install node"
+  exit
+else
+  echo " + NPM found"
+fi
+
+#
+# Check for ruby
+#
+if test ! $(which ruby)
+then
+  echo " x You need to install ruby"
+  echo "   brew install ruby"
+  exit
+else
+  echo " + Ruby found"
+fi
+
+#
+# Install sass
+#
+if test ! $(which sass)
+then
+  echo " + Installing Sass"
+  gem install sass
+fi
+
+#
+# Bootstrap npm
+#
+echo " + Bootstrapping npm packages"
+npm install
+
+#
+# Build files
+#
+echo " + Build files"
+gulp
+
+#
+# Start server
+#
+echo " + Starting httpster"
+httpster -d public/
