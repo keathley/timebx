@@ -4,6 +4,12 @@
     position: relative;
     overflow: auto;
     height: 100px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     .grabber {
       height: 14px;
