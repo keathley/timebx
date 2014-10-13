@@ -58,14 +58,17 @@ var Task = React.createClass({
     var height = this.state.bottom - this.state.top;
     var heightToColor = (height - 100) / (300 - 100); // Move these to constants
     var hue = (1 - heightToColor) * 120;
-    console.log(hue);
+    var estimatedTime = height;
     var heightStyle = {
       height: height,
       backgroundColor: 'hsl(' + hue + ', 20%, 50%)'
     };
     return (
       <div className="task" style={heightStyle}>
-        <p>{this.props.task}</p>
+        <div className="task-wrapper">
+          <h1 className="task-title">{this.props.task}</h1>
+          <span className="task-time">{estimatedTime}</span>
+        </div>
         <div className="grabber" onMouseDown={this.handleMouseDown} />
       </div>
     );

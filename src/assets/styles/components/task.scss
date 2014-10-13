@@ -1,6 +1,7 @@
 .task-list {
 
   .task {
+    color: white;
     position: relative;
     overflow: auto;
     height: 100px;
@@ -10,6 +11,19 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    .task-wrapper {
+      padding: 25px 160px;
+
+      .task-title {
+        display: inline-block;
+        margin: 0;
+      }
+
+      .task-time {
+        padding-left: 15px;
+      }
+    }
 
     .grabber {
       height: 14px;
