@@ -9,12 +9,8 @@
   "author": "Chris Keathley",
   "license": "MIT",
   "dependencies": {
-    "es6-promise": "^1.0.0",
-    "react-async": "^1.0.2",
     "react": "^0.11.2",
     "react-router-component": "^0.22.0",
-    "flux": "^2.0.1",
-    "react-component-resizable": "^0.1.1",
     "gulp-rename": "^1.2.0",
     "gulp-minify-css": "^0.3.10",
     "gulp-ruby-sass": "^0.7.1"
