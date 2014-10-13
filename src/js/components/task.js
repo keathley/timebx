@@ -64,16 +64,16 @@ var Task = React.createClass({
   },
   render: function() {
     var height = this.state.bottom - this.state.top;
+    var heightToColor = (height - 100) / (300 - 100); // Move these to constants
+    var hue = (1 - heightToColor) * 120;
+    console.log(hue);
     var heightStyle = {
-      height: height
+      height: height,
+      backgroundColor: 'hsl(' + hue + ', 20%, 50%)'
     };
     return (
       <div className="task" style={heightStyle}>
         <p>{this.props.task}</p>
-        <span>Resizing: {this.state.resizing}</span>
-        <span>Current top: {this.state.top}</span>
-        <span>Current bottom: {this.state.bottom}</span>
-        <span>Current height: {height}</span>
         <div className="grabber" onMouseDown={this.handleMouseDown} />
       </div>
     );

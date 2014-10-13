@@ -31,7 +31,7 @@ var APP = React.createClass({
       );
     }, this);
     return (
-      <div>
+      <div className="task-list">
         {tasks}
       </div>
     );

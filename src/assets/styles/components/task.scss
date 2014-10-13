@@ -1,15 +1,24 @@
-.task {
-  position: relative;
-  overflow: auto;
-  height: 100px;
+.task-list {
 
-  .grabber {
-    height: 14px;
-    background-color: #ccc;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    cursor: pointer;
+  .task {
+    position: relative;
+    overflow: auto;
+    height: 100px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .grabber {
+      height: 14px;
+      background-color: #ccc;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      cursor: pointer;
+    }
   }
 }
