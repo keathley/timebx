@@ -19,7 +19,11 @@ gulp.task('styles', function() {
   gulp.src('src/assets/styles/**/*.scss')
     .pipe(sass({
       quiet: true,
-      style: 'expanded'
+      style: 'expanded',
+      loadPath: [
+        "bower_components/bourbon/dist",
+        "bower_components/neat/app/assets/stylesheets",
+      ]
     }))
     .pipe(gulp.dest('public/css'))
     .pipe(rename({suffix: '.min'}))
@@ -30,8 +34,6 @@ gulp.task('styles', function() {
 gulp.task('copy', function() {
   gulp.src('src/index.html')
     .pipe(gulp.dest('public'));
-  gulp.src('src/assets/**/*.*')
-    .pipe(gulp.dest('public/assets'));
 });
 
 gulp.task('default', ['browserify', 'styles', 'copy']);
