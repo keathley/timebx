@@ -16,6 +16,7 @@
   "dependencies": {
     "bourbon": "~4.0.2",
     "neat": "~1.6.0",
-    "bitters": "~0.10.1"
+    "bitters": "~0.10.1",
+    "font-awesome": "~4.2.0"
   }
 }

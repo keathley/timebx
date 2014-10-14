@@ -23,6 +23,7 @@ gulp.task('styles', function() {
       loadPath: [
         "bower_components/bourbon/dist",
         "bower_components/neat/app/assets/stylesheets",
+        "bower_components/font-awesome/scss"
       ]
     }))
     .pipe(gulp.dest('public/css'))
@@ -34,6 +35,9 @@ gulp.task('styles', function() {
 gulp.task('copy', function() {
   gulp.src('src/index.html')
     .pipe(gulp.dest('public'));
+
+  gulp.src('bower_components/font-awesome/fonts/**/*')
+    .pipe(gulp.dest('public/fonts'));
 });
 
 gulp.task('default', ['browserify', 'styles', 'copy']);

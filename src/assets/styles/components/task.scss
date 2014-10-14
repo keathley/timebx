@@ -4,7 +4,7 @@
     color: white;
     position: relative;
     overflow: auto;
-    height: 100px;
+    min-height: 150px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -13,16 +13,53 @@
     user-select: none;
 
     .task-wrapper {
-      padding: 25px 160px;
+      position: relative;
+      max-width: 80%;
+      margin: 25px auto;
+      z-index: 999;
 
-      .task-title {
-        display: inline-block;
-        margin: 0;
+      .task-info, .task-stats {
+        float: left;
+        display: block;
+        width: 48.6%;
       }
 
-      .task-time {
-        padding-left: 15px;
+      .task-info {
+        margin-right: 2.3%;
+
+        .task-title {
+          margin: 0;
+          font-size: 60px;
+        }
+
+        .task-total-time {
+          margin: 0;
+
+          .time {
+            padding-left: 10px;
+            font-weight: 100;
+          }
+        }
       }
+
+      .task-stats {
+        margin-right: 0;
+
+        .task-elapsed-time {
+          font-weight: 100;
+          font-size: 70px;
+          margin: 0;
+          float: right;
+        }
+      }
+    }
+
+    .task-done-amount {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
     }
 
     .grabber {
@@ -33,6 +70,7 @@
       left: 0;
       right: 0;
       cursor: pointer;
+      z-index: 9999;
     }
   }
 }

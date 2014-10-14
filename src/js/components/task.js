@@ -4,13 +4,20 @@
 
 var React = require('react');
 
+function heightToSeconds(height) {
+  var minutes = height / 100;
+  return minutes * 60;
+}
+
 var Task = React.createClass({
   getInitialState: function(){
     return {
       resizing: false,
+      secondsElapsed: 0
     };
   },
   componentDidMount: function() {
+    this.interval = setInterval(this.tick, 1000);
     var rect = this.getDOMNode().getBoundingClientRect();
     this.setState({
       top: rect.top,
@@ -18,12 +25,13 @@ var Task = React.createClass({
     });
   },
   componentWillUnmount: function() {
+    clearInterval(this.interval);
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('mouseup', this.handleMouseMove);
   },
   clampBottomPos: function(top, bottom) {
-    if (bottom - top < 100) {
-      bottom = 100 + top;
+    if (bottom - top < 150) {
+      bottom = 150 + top;
     }
     return bottom;
   },
@@ -54,21 +62,40 @@ var Task = React.createClass({
       bottom: rect.bottom
     });
   },
+  tick: function() {
+    this.setState({secondsElapsed: this.state.secondsElapsed + 1});
+  },
   render: function() {
     var height = this.state.bottom - this.state.top;
     var heightToColor = (height - 100) / (300 - 100); // Move these to constants
     var hue = (1 - heightToColor) * 120;
     var estimatedTime = height;
+    var percentageDone = this.state.secondsElapsed / heightToSeconds(height);
     var heightStyle = {
       height: height,
-      backgroundColor: 'hsl(' + hue + ', 20%, 50%)'
+      backgroundColor: 'hsl(' + hue + ', 8%, 50%)'
+    };
+    var doneStyle = {
+      height: height * percentageDone,
+      backgroundColor: 'hsl(' + hue + ', 40%, 50%)'
     };
     return (
       <div className="task" style={heightStyle}>
         <div className="task-wrapper">
-          <h1 className="task-title">{this.props.task}</h1>
-          <span className="task-time">{estimatedTime}</span>
+          <div className="task-info">
+            <h1 className="task-title">{this.props.task}</h1>
+            <h3 className="task-total-time">
+              <i className="fa fa-clock-o" />
+              <span className="time">01:15:00</span>
+            </h3>
+          </div>
+          <div className="task-stats">
+            <h1 className="task-elapsed-time">
+              00:42:13
+            </h1>
+          </div>
         </div>
+        <div className="task-done-amount" style={doneStyle} />
         <div className="grabber" onMouseDown={this.handleMouseDown} />
       </div>
     );
