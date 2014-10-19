@@ -15,10 +15,8 @@ var APP = React.createClass({
   },
   handleClick: function(index) {
     for (var i in this.refs) {
-      if (index !== i) {
-        var task = this.refs[i];
-        task.updateGlobalPos();
-      }
+      var task = this.refs[i];
+      task.updateGlobalPos();
     }
   },
   onChange: function(e) {

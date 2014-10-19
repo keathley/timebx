@@ -4,6 +4,7 @@
 
 var React = require('react');
 
+var MINHEIGHT = 100;
 
 var Task = React.createClass({
   getInitialState: function(){
@@ -26,8 +27,8 @@ var Task = React.createClass({
     window.removeEventListener('mouseup', this.handleMouseMove);
   },
   clampBottomPos: function(top, bottom) {
-    if (bottom - top < 150) {
-      bottom = 150 + top;
+    if (bottom - top < MINHEIGHT) {
+      bottom = MINHEIGHT + top;
     }
     return bottom;
   },
@@ -52,8 +53,8 @@ var Task = React.createClass({
     window.addEventListener('mouseup', this.handleMouseUp);
   },
   handleMouseMove: function(e) {
-    var top     = 10 * Math.round(this.state.top/10);
-    var rounded = 5  * Math.round(e.clientY/5);
+    var top     = 10 * Math.round(this.state.top/10) + window.scrollX;
+    var rounded = 5  * Math.round(e.clientY/5) + window.scrollX;
     rounded = this.clampBottomPos(top, rounded);
     this.setState({
       bottom: rounded
