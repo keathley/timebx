@@ -9,7 +9,7 @@ var APP = React.createClass({
     return {
       tasks: [
         'Work on website',
-        'Do some other shit'
+        'Other stuff'
       ]
     };
   },
