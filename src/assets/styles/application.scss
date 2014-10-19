@@ -3,5 +3,9 @@
 
 @import "globals/base";
 @import "globals/type";
+@import "globals/forms";
 
 @import "components/task";
+@import "components/task_form";
+
+@import "sections/task_list";
