@@ -1,5 +1,5 @@
 .task-list {
-  $base-width: 90%;
+  $base-width: 100%;
 
   width: $base-width;
   margin: 0 auto;
@@ -62,7 +62,7 @@
 
         .task-elapsed-time {
           font-weight: 100;
-          font-size: $base-font-size;
+          font-size: $base-font-size*2;
           margin: 0;
           float: right;
         }
