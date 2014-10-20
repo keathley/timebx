@@ -4,6 +4,7 @@
 
 var React = require('react');
 
+var MINHEIGHT = 100;
 
 var Task = React.createClass({
   getInitialState: function(){
@@ -14,11 +15,7 @@ var Task = React.createClass({
     };
   },
   componentDidMount: function() {
-    var rect = this.getDOMNode().getBoundingClientRect();
-    this.setState({
-      top: rect.top,
-      bottom: rect.bottom
-    });
+    this.updateGlobalPos();
   },
   componentWillUnmount: function() {
     clearInterval(this.interval);
@@ -26,8 +23,8 @@ var Task = React.createClass({
     window.removeEventListener('mouseup', this.handleMouseMove);
   },
   clampBottomPos: function(top, bottom) {
-    if (bottom - top < 150) {
-      bottom = 150 + top;
+    if (bottom - top < MINHEIGHT) {
+      bottom = MINHEIGHT + top;
     }
     return bottom;
   },
@@ -40,7 +37,6 @@ var Task = React.createClass({
     this.setState({ working: false });
   },
   toggleStart: function() {
-    console.log("TOGGLE", this.state.working);
     if (this.state.working)
       this.stopWorking();
     else
@@ -48,6 +44,7 @@ var Task = React.createClass({
   },
   handleMouseDown: function(e) {
     this.setState({ resizing: true });
+    this.updateGlobalPos();
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('mouseup', this.handleMouseUp);
   },
@@ -55,13 +52,10 @@ var Task = React.createClass({
     var top     = 10 * Math.round(this.state.top/10);
     var rounded = 5  * Math.round(e.clientY/5);
     rounded = this.clampBottomPos(top, rounded);
-    this.setState({
-      bottom: rounded
-    });
+    this.setState({ bottom: rounded });
   },
   handleMouseUp: function(e) {
     if (!this.state.resizing) { return; }
-    this.props.onResize();
     this.setState({ resizing: false });
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('mouseup', this.handleMouseMove);

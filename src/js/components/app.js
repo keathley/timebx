@@ -13,14 +13,6 @@ var APP = React.createClass({
       ]
     };
   },
-  handleClick: function(index) {
-    for (var i in this.refs) {
-      if (index !== i) {
-        var task = this.refs[i];
-        task.updateGlobalPos();
-      }
-    }
-  },
   onChange: function(e) {
     this.setState({text: e.target.value});
   },
@@ -33,10 +25,7 @@ var APP = React.createClass({
   render: function() {
     var tasks = this.state.tasks.map(function(task, i) {
       return (
-        <Task onResize={this.handleClick.bind(this, i)}
-          key={i}
-          task={task}
-          ref={'item' + i} />
+        <Task task={task} />
       );
     }, this);
     return (
