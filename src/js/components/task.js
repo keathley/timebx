@@ -3,6 +3,7 @@
  */
 
 var React = require('react');
+var TaskActions = require('../actions/task_actions');
 
 var MINHEIGHT = 100;
 
@@ -68,7 +69,8 @@ var Task = React.createClass({
     });
   },
   tick: function() {
-    this.setState({secondsElapsed: this.state.secondsElapsed + 1});
+    var newTime = this.props.task.secondsElapsed + 1;
+    TaskActions.updateTime(this.props.task, newTime);
   },
   formatTime: function(timeInSeconds) {
     seconds = Math.floor(timeInSeconds % 60);
@@ -85,11 +87,12 @@ var Task = React.createClass({
     return minutes * 60;
   },
   render: function() {
+    var task = this.props.task;
     var height = this.state.bottom - this.state.top;
     var heightToColor = (height - 100) / (300 - 100); // Move these to constants
     var hue = (1 - heightToColor) * 120;
     var estimatedTime = this.heightToSeconds(height);
-    var percentageDone = this.state.secondsElapsed / this.heightToSeconds(height);
+    var percentageDone = task.secondsElapsed / this.heightToSeconds(height);
     var heightStyle = {
       height: height,
       backgroundColor: 'hsl(' + hue + ', 8%, 50%)'
@@ -102,7 +105,7 @@ var Task = React.createClass({
       <div className="task" style={heightStyle}>
         <div className="task-wrapper" onClick={this.toggleStart}>
           <div className="task-info">
-            <h1 className="task-title">{this.props.task.text}</h1>
+            <h1 className="task-title">{task.text}</h1>
             <h3 className="task-total-time">
               <i className="fa fa-clock-o" />
               <span className="time">{this.formatTime(estimatedTime)}</span>
@@ -110,7 +113,7 @@ var Task = React.createClass({
           </div>
           <div className="task-stats">
             <h1 className="task-elapsed-time">
-              {this.formatTime(this.state.secondsElapsed)}
+              {this.formatTime(task.secondsElapsed)}
             </h1>
           </div>
         </div>
