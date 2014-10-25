@@ -11,6 +11,16 @@ var TaskActions = {
       text: text
     });
     TaskWebAPIUtils.create(text);
+  },
+
+  updateTime: function(task, time) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.TASK_UPDATE_TIME,
+      id: task.id,
+      time: task.secondsElapsed
+    });
+    task.secondsElapsed = time;
+    TaskWebAPIUtils.save(task);
   }
 };
 

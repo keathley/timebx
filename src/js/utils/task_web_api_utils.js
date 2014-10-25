@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var ServerActionCreators = require('../actions/server_action_creators');
 
 module.exports = {
@@ -7,7 +8,8 @@ module.exports = {
     var id = 'm_' + timestamp;
     var newTask = {
       id: id,
-      text: text
+      text: text,
+      secondsElapsed: 0
     };
     tasks.unshift(newTask);
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -16,5 +18,11 @@ module.exports = {
   getAll: function() {
     var tasks = JSON.parse(localStorage.getItem('tasks'));
     ServerActionCreators.receiveAll(tasks);
+  },
+  save: function(task) {
+    var tasks = JSON.parse(localStorage.getItem('tasks'));
+    var taskIndex = _.findIndex(tasks, { 'id': task.id});
+    tasks[taskIndex] = task;
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 };
