@@ -3,38 +3,36 @@
  */
 var React = require('react');
 var Task = require('./task');
+var TaskStore = require('../stores/task_store');
+var TaskForm = require('./task_form');
+
+function getTaskState() {
+  return {
+    tasks: TaskStore.all()
+  };
+}
 
 var APP = React.createClass({
   getInitialState: function() {
-    return {
-      tasks: [
-        'Work on website',
-        'Other stuff'
-      ]
-    };
+    return getTaskState();
   },
-  onChange: function(e) {
-    this.setState({text: e.target.value});
+  componentDidMount: function() {
+    TaskStore.addChangeListener(this._onChange);
   },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var nextTasks = [this.state.text].concat(this.state.tasks);
-    var nextText = '';
-    this.setState({tasks: nextTasks, text: nextText});
+  componentWillUnmount: function() {
+    TaskStore.removeChangeListener(this._onChage);
+  },
+  _onChange: function(e) {
+    this.setState(getTaskState());
   },
   render: function() {
-    var tasks = this.state.tasks.map(function(task, i) {
-      return (
-        <Task task={task} />
-      );
-    }, this);
+    var tasks = [];
+    for (var key in this.state.tasks) {
+      tasks.push(<Task key={key} task={this.state.tasks[key]} />);
+    }
     return (
       <div className="task-list">
-        <form className="task-form" onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange}
-            value={this.state.text}
-            placeholder="What needs doing..." />
-        </form>
+        <TaskForm />
         {tasks}
       </div>
     );

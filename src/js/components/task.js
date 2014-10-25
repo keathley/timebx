@@ -102,7 +102,7 @@ var Task = React.createClass({
       <div className="task" style={heightStyle}>
         <div className="task-wrapper" onClick={this.toggleStart}>
           <div className="task-info">
-            <h1 className="task-title">{this.props.task}</h1>
+            <h1 className="task-title">{this.props.task.text}</h1>
             <h3 className="task-total-time">
               <i className="fa fa-clock-o" />
               <span className="time">{this.formatTime(estimatedTime)}</span>
