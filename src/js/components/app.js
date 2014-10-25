@@ -28,7 +28,7 @@ var APP = React.createClass({
   render: function() {
     var tasks = [];
     for (var key in this.state.tasks) {
-      tasks.push(<Task key={key} task={this.state.tasks[key]} />);
+      tasks.unshift(<Task key={key} task={this.state.tasks[key]} />);
     }
     return (
       <div className="task-list">
