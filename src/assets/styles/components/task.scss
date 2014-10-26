@@ -10,7 +10,7 @@
 
     color: white;
     position: relative;
-    overflow: auto;
+    overflow-y: hidden;
     min-height: $min-height;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
