@@ -3,27 +3,31 @@
  */
 var React = require('react');
 var Task = require('./task');
-var TaskStore = require('../stores/task_store');
 var TaskForm = require('./task_form');
-
-function getTaskState() {
-  return {
-    tasks: TaskStore.all()
-  };
-}
+var ReactFireMixin = require('reactfire');
+var Firebase = require('firebase');
+var TaskConstants = require('../constants/task_constants');
 
 var APP = React.createClass({
   getInitialState: function() {
-    return getTaskState();
+    return {
+      tasks: []
+    };
   },
-  componentDidMount: function() {
-    TaskStore.addChangeListener(this._onChange);
+  componentWillMount: function() {
+    var tasks = [];
+    this.firebaseRef = new Firebase(TaskConstants.TASKS_URL);
+    this.firebaseRef.on("child_added", function(snapshot) {
+      var task = snapshot.val();
+      task.id = snapshot.name();
+      tasks.push(task);
+      this.setState({
+        tasks: tasks
+      });
+    }.bind(this));
   },
   componentWillUnmount: function() {
-    TaskStore.removeChangeListener(this._onChage);
-  },
-  _onChange: function(e) {
-    this.setState(getTaskState());
+    this.firebaseRef.off();
   },
   render: function() {
     var tasks = [];
