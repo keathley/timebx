@@ -1,9 +1,9 @@
 /**
  * @jsx React.DOM
  */
-
 var React = require('react');
-var TaskActions = require('../actions/task_actions');
+var Firebase = require('firebase');
+var TaskConstants = require('../constants/task_constants');
 
 var TaskForm = React.createClass({
   getInitialState: function() {
@@ -11,9 +11,18 @@ var TaskForm = React.createClass({
       text: ''
     };
   },
+  componentWillMount: function() {
+    this.firebaseRef = new Firebase(TaskConstants.TASKS_URL);
+  },
+  componentWillUnmount: function() {
+    this.firebaseRef.off();
+  },
   handleSubmit: function(e) {
     e.preventDefault();
-    TaskActions.create(this.state.text);
+    this.firebaseRef.push({
+      text: this.state.text,
+      secondsElapsed: 0
+    });
     this.setState({text: ''});
   },
   onChange: function(event) {
@@ -30,7 +39,6 @@ var TaskForm = React.createClass({
       </form>
     );
   }
-
 });
 
 module.exports = TaskForm;
