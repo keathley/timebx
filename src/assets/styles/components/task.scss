@@ -23,6 +23,10 @@
       margin-top: -6px;
     }
 
+    @media screen and (max-width: $break-small) {
+      $base-font-size: 14px;
+    }
+
     .task-wrapper {
       position: absolute;
       display: block;
