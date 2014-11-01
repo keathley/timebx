@@ -23,7 +23,4 @@ Everything is shipped in a public directory so that it works out of the box with
 
 ## Author
 
-Spyc3r (Chris Keathley) - @ChrisKeathley
-
-
-
+Keathley (Chris Keathley) - @ChrisKeathley

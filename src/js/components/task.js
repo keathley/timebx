@@ -55,22 +55,24 @@ var Task = React.createClass({
     else
       this.startWorking();
   },
-  handleTouchDown: function(e) {
-    console.log("Touched");
+  handleTouchStart: function(e) {
     this.setState({ resizing: true });
     this.updateGlobalPos();
     window.addEventListener('touchmove', this.handleTouchMove);
     window.addEventListener('touchend', this.handleTouchEnd);
+    e.preventDefault();
   },
   handleTouchMove: function(e) {
     var touchPoint = e.changedTouches[0];
-    updateDrag(touchPoint.clientY);
+    this.updateDrag(touchPoint.clientY);
+    e.preventDefault();
   },
   handleTouchEnd: function(e) {
     if (!this.state.resizing) { return; }
     this.setState({ resizing: false });
     window.removeEventListener('touchmove', this.handleTouchMove);
     window.removeEventListener('touchend', this.handleTouchEnd);
+    e.preventDefault();
   },
   handleMouseDown: function(e) {
     this.setState({ resizing: true });
@@ -79,7 +81,7 @@ var Task = React.createClass({
     window.addEventListener('mouseup', this.handleMouseUp);
   },
   handleMouseMove: function(e) {
-    updateDrag(e.clientY);
+    this.updateDrag(e.clientY);
   },
   handleMouseUp: function(e) {
     if (!this.state.resizing) { return; }

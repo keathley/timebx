@@ -7,10 +7,12 @@
   .task {
     $min-height: 100px;
     $base-font-size: 30px;
+    $small-base-font-size: 15px;
+
 
     color: white;
     position: relative;
-    overflow: auto;
+    overflow-y: hidden;
     min-height: $min-height;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -48,6 +50,10 @@
         .task-title {
           margin: 0;
           font-size: $base-font-size;
+
+          @media screen and (max-width: $break-small) {
+            font-size: $small-base-font-size;
+          }
         }
 
         .task-total-time {
@@ -68,6 +74,10 @@
           font-size: $base-font-size*2;
           margin: 0;
           float: right;
+
+          @media screen and (max-width: $break-small) {
+            font-size: $small-base-font-size*2;
+          }
         }
       }
     }
